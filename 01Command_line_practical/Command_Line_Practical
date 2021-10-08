@@ -1,0 +1,32 @@
+ls 
+cd ..
+ls -a
+pwd
+cd 01Command_line_practical 
+echo "Ellie"
+echo "Ellie" > myname.txt
+echo "Brakoniecki >> myname.txt
+
+touch file1.txt
+open file1.txt
+ls -a
+touch file1.txt
+ls -a
+
+touch file2.txt
+touch file3.txt
+open file2.txt
+open file3.txt
+cat file2 file3
+
+export name="ellie"
+$name
+
+mkdir newfolder
+cd newfolder
+touch test1 test2 test3
+echo "Ellie" > test1
+echo "Brakoniecki" >> test1
+wc -w test1
+wc -c test1
+
