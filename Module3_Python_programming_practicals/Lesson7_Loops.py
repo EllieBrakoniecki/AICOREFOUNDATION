@@ -155,10 +155,8 @@ def primes_between_two_numbers(number1, number2):
         list_of_primes = [2]
         number1 = 3
     else:
-        list_of_primes = []
-    
+        list_of_primes = [] 
     for i in range(number1, number2 + 1):
-
         j = 2
         while (i % j) != 0 and j < i:
             if j == i - 1:
