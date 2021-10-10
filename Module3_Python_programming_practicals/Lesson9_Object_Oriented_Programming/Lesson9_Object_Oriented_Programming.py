@@ -274,49 +274,4 @@ octagon = ManySidedPolygon(8)
 print(octagon)
 
 
-
-
-# %%
-# Hangman
-
-class Hangman: 
-    def __init__(self, secret_word):
-        self.secret_word = secret_word
-        self.letters_guessed = [_] * len(self.secret_word)
-        self.hangman_parts_left_to_draw = 6
-    
-    def guess_letter(self, letter):
-        correct_guess_this_turn = 0
-        for i in range(len(self.secret_word)):
-            if letter == self.secret_word[i]:
-                correct_guess_this_turn +=1
-                self.letters_guessed[i] = letter
-        if correct_guess_this_turn > 0:
-            return True
-        else:
-            self.hangman_parts_left_to_draw -=1
-            return False
-
-    def guess_word(self, word):
-        if word == self.secret_word:
-            return True
-        return False
-            
-
-    def play_game(self):
-        guess = input(f" Welcome to Hangman! The word to guess is a {len(self.secret_word)} letter word {self.letters_guessed}. Enter your first guess for a letter")
-        while self.hangman_parts_left_to_draw > 0:
-            if (self.guess_letter(guess)):
-                guess_word = input(f"You have guessed correctly and the word is now {self.letters_guessed}. Guess the word.")
-                if self.guess_word(guess_word):
-                    print(f"You have won, well done! The word was {self.secret_word}")
-                    return
-            if self.hangman_parts_left_to_draw == 0:
-                return print(f"You have lost:( The word was {self.secret_word}")
-            guess = input(f"You have guessed incorrectly. Guess another letter {self.letters_guessed}")
-          
-
-hangman = Hangman("elephant")
-hangman.play_game()
-
 # %%
