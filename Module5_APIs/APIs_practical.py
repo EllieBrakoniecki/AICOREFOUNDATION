@@ -126,7 +126,7 @@ print(len(list_of_questions[num_of_pages-1]['items']) == 100)
 # Now find the users who asked the most questions: 
 temp = {}
 #for i in range(len(list_of_questions)):
-for i in range(5):
+for i in range(5): #use above for loop when permitted to get all the data
     for dict in list_of_questions[i]['items']: 
         if dict['owner']['display_name'] in temp.keys():
             temp[dict['owner']['display_name']] += 1
