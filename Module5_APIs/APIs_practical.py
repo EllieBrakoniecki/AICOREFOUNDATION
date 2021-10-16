@@ -106,16 +106,21 @@ len(mylist[0]['items'])
 
 import requests
 import time
+from datetime import datetime, timezone
 
 # first find how many questions were asked in the last day so can work out how many pages to ask for
 # use a custom filter that uses 'total' instead of 'items' in the wrapper of the 'questions' API
-url = 'http://api.stackexchange.com/2.3/questions?page=1&pagesize=2&fromdate=1634256000&order=desc&sort=creation&site=stackoverflow&filter=!-)3Kfj1w8kqK'
+
+mydate = datetime.today().date()
+mydate_in_epoch = int(datetime(mydate.year,mydate.month, mydate.day, 0, 0).replace(tzinfo=timezone.utc).timestamp())
+
+url = f'http://api.stackexchange.com/2.3/questions?page=1&pagesize=2&fromdate={mydate_in_epoch}&order=desc&sort=creation&site=stackoverflow&filter=!-)3Kfj1w8kqK'
 question_count = requests.get(url).json()
 total_no_questions_in_last_day = question_count['total']
 num_of_pages = total_no_questions_in_last_day // 100 # max is 100 (note:should round up not down really! )
 
 # now call Pagination function with url that includes all the question 'items' from the last day to get a list of all the questions
-url1 = 'http://api.stackexchange.com/2.3/questions?fromdate=1634256000&order=desc&sort=activity&site=stackoverflow'
+url1 = f'http://api.stackexchange.com/2.3/questions?fromdate={mydate_in_epoch}&order=desc&sort=activity&site=stackoverflow'
 list_of_questions = Pagination(url1, num_of_pages, 100)
 
 # now check first and last pages have 100 questions to make sure we received the data ok
@@ -125,8 +130,7 @@ print(len(list_of_questions[num_of_pages-1]['items']) == 100)
 #%%
 # Now find the users who asked the most questions: 
 temp = {}
-#for i in range(len(list_of_questions)):
-for i in range(5): #use above for loop when permitted to get all the data
+for i in range(len(list_of_questions)):
     for dict in list_of_questions[i]['items']: 
         if dict['owner']['display_name'] in temp.keys():
             temp[dict['owner']['display_name']] += 1
@@ -137,5 +141,10 @@ most_curious_users = sorted(temp, key=temp.get, reverse=True)[0:6]
 most_curious_users_with_score = {most_curious_users[i] : temp[most_curious_users[i]] for i in range(len(most_curious_users))}
 print(most_curious_users_with_score)
 
+#%%
+from datetime import datetime, timezone
 
+mydate = datetime.today().date()
+datetime(mydate.year,mydate.month, mydate.day, 0, 0).replace(tzinfo=timezone.utc).timestamp()
+# %%
 
