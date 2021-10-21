@@ -130,6 +130,7 @@ print(len(list_of_questions[num_of_pages-1]['items']) == 100)
 #%%
 # Now find the users who asked the most questions: 
 temp = {}
+# use a default dictionary here instead
 for i in range(len(list_of_questions)):
     for dict in list_of_questions[i]['items']: 
         if dict['owner']['display_name'] in temp.keys():
@@ -137,7 +138,7 @@ for i in range(len(list_of_questions)):
         else:
             temp[dict['owner']['display_name']] = 1
 
-most_curious_users = sorted(temp, key=temp.get, reverse=True)[0:6]
+most_curious_users = sorted(temp, key=temp.get, reverse=True)[0:5]
 most_curious_users_with_score = {most_curious_users[i] : temp[most_curious_users[i]] for i in range(len(most_curious_users))}
 print(most_curious_users_with_score)
 
