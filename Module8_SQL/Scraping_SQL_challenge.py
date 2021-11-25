@@ -87,8 +87,7 @@ Timdf.to_sql(
 engine.execute('''SELECT * FROM samuel''').fetchall()
 Samuel = pd.read_sql_table('samuel', engine)
 Samuel.head(10)
-# actors = pd.read_sql_query('''SELECT * FROM actor LIMIT 10''', engine).set_index('actor_id')
-# actors
+
 # %%
 # Answers
 # CREATE TABLE common AS 
