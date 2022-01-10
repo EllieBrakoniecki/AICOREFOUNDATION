@@ -1,0 +1,19 @@
+# ssh to ubuntu EC2 instance (don't forget ubuntu not ec2-user)
+# get docker: (see https://medium.com/@cjus/installing-docker-ce-on-an-aws-ec2-instance-running-ubuntu-16-04-f42fe7e80869)
+
+# put .pem file in .ssh folder 
+
+# curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
+# sudo add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable
+# sudo apt-get update
+# sudo apt-get install -y docker-ce
+# docker --version
+
+pip install selenium
+
+#pull and run selenium from docker hub:
+sudo docker pull selenium/standalone-chrome
+sudo docker run -d -p 4444:4444 --shm-size=2g selenium/standalone-chrome:4.0.0-rc-2-prerelease-20210923
+
+## scp from the terminal not the instance ##
+scp -i aicorekey.pem /Users/eleanorbrakoniecki/scratch/DOCKER/practical3/scraper_remote_webdriver.py ubuntu@ec2-18-170-25-7.eu-west-2.compute.amazonaws.com:.
